@@ -1,11 +1,10 @@
+import React from 'react';
+import TodoTextInput from '../TodoTextInput';
 
-import React, { Component } from 'react'
-import TodoTextInput from '../TodoTextInput'
-
-class Header extends Component {
+class Header extends React.Component {
   handleSave(text) {
     if (text.length) {
-      this.props.addTodo(text)
+      this.props.addTodo(text);
     }
   }
 
@@ -18,8 +17,8 @@ class Header extends Component {
           onSave={::this.handleSave}
           placeholder="What needs to be done?" />
       </header>
-    )
+    );
   }
 }
 
-export default Header
+export default Header;

@@ -1,9 +1,8 @@
+import React from 'react';
+import classnames from 'classnames';
+import style from './style.css';
 
-import React, { Component } from 'react'
-import classnames from 'classnames'
-import style from './style.css'
-
-class TodoTextInput extends Component {
+class TodoTextInput extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -47,8 +46,8 @@ class TodoTextInput extends Component {
         onBlur={::this.handleBlur}
         onChange={::this.handleChange}
         onKeyDown={::this.handleSubmit} />
-    )
+    );
   }
-}
+};
 
-export default TodoTextInput
+export default TodoTextInput;

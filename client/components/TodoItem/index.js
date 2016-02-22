@@ -1,19 +1,18 @@
+import React from 'react';
+import TodoTextInput from '../TodoTextInput';
+import classnames from 'classnames';
+import style from './style.css';
 
-import React, { Component } from 'react'
-import TodoTextInput from '../TodoTextInput'
-import classnames from 'classnames'
-import style from './style.css'
-
-class TodoItem extends Component {
+class TodoItem extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
       editing: false
-    }
+    };
   }
 
   handleDoubleClick() {
-    this.setState({ editing: true })
+    this.setState({ editing: true });
   }
 
   handleSave(id, text) {
@@ -22,7 +21,7 @@ class TodoItem extends Component {
     } else {
       this.props.editTodo({ id, text })
     }
-    this.setState({ editing: false })
+    this.setState({ editing: false });
   }
 
   render() {
@@ -57,14 +56,14 @@ class TodoItem extends Component {
       [style.completed]: todo.completed,
       [style.editing]: this.state.editing,
       [style.normal]: !this.state.editing
-    })
+    });
 
     return (
       <li className={classes}>
         {element}
       </li>
-    )
+    );
   }
-}
+};
 
-export default TodoItem
+export default TodoItem;

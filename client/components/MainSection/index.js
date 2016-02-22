@@ -1,31 +1,30 @@
-
-import React, { Component } from 'react'
-import TodoItem from '../TodoItem'
-import Footer from '../Footer'
-import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../../constants/filters'
-import style from './style.css'
+import React from 'react';
+import TodoItem from '../TodoItem';
+import Footer from '../Footer';
+import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../../constants/filters';
+import style from './style.css';
 
 const TODO_FILTERS = {
   [SHOW_ALL]: () => true,
   [SHOW_ACTIVE]: todo => !todo.completed,
   [SHOW_COMPLETED]: todo => todo.completed
-}
+};
 
-class MainSection extends Component {
+class MainSection extends React.Component {
   constructor(props, context) {
-    super(props, context)
-    this.state = { filter: SHOW_ALL }
+    super(props, context);
+    this.state = { filter: SHOW_ALL };
   }
 
   handleClearCompleted() {
-    const atLeastOneCompleted = this.props.todos.some(todo => todo.completed)
+    const atLeastOneCompleted = this.props.todos.some(todo => todo.completed);
     if (atLeastOneCompleted) {
-      this.props.actions.clearCompleted()
+      this.props.actions.clearCompleted();
     }
   }
 
   handleShow(filter) {
-    this.setState({ filter })
+    this.setState({ filter });
   }
 
   renderToggleAll(completedCount) {
@@ -76,6 +75,6 @@ class MainSection extends Component {
       </section>
     )
   }
-}
+};
 
-export default MainSection
+export default MainSection;
