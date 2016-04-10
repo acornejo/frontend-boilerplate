@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
 import { connect, Provider } from 'react-redux';
 import { combineReducers, applyMiddleware, createStore, bindActionCreators } from 'redux';
-import { actionCreators, actionReducers } from './actions';
 import { Router, Route, browserHistory } from 'react-router';
-import { syncHistory, routeReducer } from 'react-router-redux';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+
+import App from './components/App';
+import About from './components/About';
+import { actionCreators, actionReducers } from './actions';
 
 function mapStateToProps(state) {
   return { todos: state.todos };
@@ -17,17 +19,16 @@ function mapDispatchToProps(dispatch) {
 
 const connectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
 
-// create store, with routing + history mess
-const reducer = combineReducers({routing: routeReducer, todos: actionReducers});
-const reduxRouterMiddleware = syncHistory(browserHistory);
-const createStoreWithMiddleware =
-  applyMiddleware(reduxRouterMiddleware)(createStore);
-const store = createStoreWithMiddleware(reducer);
+const reducers = combineReducers({routing: routerReducer, todos: actionReducers});
+const store = createStore(reducers, undefined,  window.devToolsExtension ? window.devToolsExtension() : undefined);
+const history = syncHistoryWithStore(browserHistory, store);
+
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={history}>
       <Route path="/" component={connectedApp} />
+      <Route path="/about" component={About} />
     </Router>
   </Provider>,
   document.getElementById('root')

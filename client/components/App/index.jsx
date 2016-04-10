@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoTextInput from '../TodoTextInput';
 import TodoItem from '../TodoItem';
+import { Link } from 'react-router';
 import style from './style.css';
 
 class App extends React.Component {
@@ -28,6 +29,9 @@ class App extends React.Component {
             )}
           </ul>
         </section>
+        <footer>
+          <Link to="/about">about</Link>
+        </footer>
       </div>
     );
   }
