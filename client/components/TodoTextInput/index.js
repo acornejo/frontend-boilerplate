@@ -2,11 +2,13 @@ import React from 'react';
 import classnames from 'classnames';
 import style from './style.css';
 
+const emptyText = '';
+
 class TodoTextInput extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
-      text: this.props.text || ''
+      text: this.props.text || emptyText
     }
   }
 
@@ -15,7 +17,7 @@ class TodoTextInput extends React.Component {
     if (e.which === 13) {
       this.props.onSave(text)
       if (this.props.newTodo) {
-        this.setState({ text: '' })
+        this.setState({ text: emptyText })
       }
     }
   }
