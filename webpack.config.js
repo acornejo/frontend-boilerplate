@@ -1,6 +1,9 @@
-var rucksack = require('rucksack-css');
-var webpack = require('webpack');
 var path = require('path');
+
+// webpack plugins
+var webpack = require('webpack');
+var rucksack = require('rucksack-css');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var plugins = [];
 var js_loaders = ['babel-loader'];
@@ -8,7 +11,7 @@ var js_loaders = ['babel-loader'];
 if (process.env.NODE_ENV == "production") {
   plugins.push(new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'));
   plugins.push(new webpack.optimize.DedupePlugin());
-  // plugins.push(new webpack.optimize.UglifyJsPlugin({sourceMap: false}));
+  plugins.push(new webpack.optimize.UglifyJsPlugin({sourceMap: false}));
   plugins.push(new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify("production")
   }));
@@ -43,6 +46,10 @@ module.exports = {
       {
         test: /\.html$/,
         loader: 'file?name=[name].[ext]'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json'
       },
       {
         test: /\.css$/,
